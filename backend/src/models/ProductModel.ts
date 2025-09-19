@@ -11,6 +11,7 @@ class ProductModel extends Model {
   unit_details?: string; // nem  toda unidadde precisa de detalhe
   image_url!: string;
   categoryId!: number;
+  producerId!: number;
 }
 
 ProductModel.init(
