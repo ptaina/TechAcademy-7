@@ -1,9 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import sequelize from "./config/database";
 import { associateModels } from "./models/associateModels";
 import producerRoutes from "./routes/producerRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import productRoutes from "./routes/productRoutes";
+import loginRoutes from "./routes/loginRoutes";
 
 const app = express();
 const port = 3000;
@@ -16,6 +20,7 @@ app.get("/", (req, res) => {
 app.use(producerRoutes);
 app.use(categoryRoutes);
 app.use(productRoutes);
+app.use(loginRoutes);
 
 associateModels();
 
