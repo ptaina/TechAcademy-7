@@ -53,15 +53,12 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
+    const loggedProducer = req.user as JwtPayload;
+
     const products = await ProductModel.findAll({
-      include: [
-        { model: CategoryModel, as: "category" },
-        {
-          model: ProducerModel,
-          as: "producer",
-          attributes: { exclude: ["password", "cpf"] },
-        },
-      ],
+      where: { producerId: loggedProducer.id },
+      include: [{ model: CategoryModel, as: "category" }],
+      order: [["createdAt", "DESC"]],
     });
     return res.status(200).json(products);
   } catch (error) {
